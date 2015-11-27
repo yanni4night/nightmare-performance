@@ -1,0 +1,32 @@
+{
+  "name": "nightmare-performance",
+  "version": "1.0.0",
+  "description": "performance on nightmare",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --harmony test.js",
+    "server": "node --harmony server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yanni4night/nightmare-performance.git"
+  },
+  "keywords": [
+    "performance",
+    "nightmare"
+  ],
+  "author": "yanni4night@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yanni4night/nightmare-performance/issues"
+  },
+  "homepage": "https://github.com/yanni4night/nightmare-performance#readme",
+  "dependencies": {
+    "koa": "^1.1.2",
+    "koa-router": "^5.3.0",
+    "koa-sendfile": "^1.1.1",
+    "koa-static": "^1.5.2",
+    "nightmare": "^2.0.8",
+    "vo": "^1.0.3"
+  }
+}
