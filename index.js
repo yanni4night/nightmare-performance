@@ -13,7 +13,7 @@
 const Nightmare = require('nightmare');
 const vo = require('vo');
 
-function* work(url, times) {
+function* work(url, times, sniff) {
     const n = Nightmare({
         width: 2560,
         height: 1440,
@@ -25,7 +25,9 @@ function* work(url, times) {
     var loaded = false;
 
     // iPhone 6
-    n.useragent('Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/600.1.3 (KHTML, like Gecko) Version/8.0 Mobile/12A4345d Safari/600.1.4');
+    n.useragent(
+        'Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/600.1.3 (KHTML, like Gecko) Version/8.0 Mobile/12A4345d Safari/600.1.4'
+    );
 
     n.on('dom-ready', function () {
         loaded = true;
@@ -44,11 +46,16 @@ function* work(url, times) {
             yield n.wait(1e3);
         }
 
-        var timing = yield n.evaluate(() => {
+        var timing = yield n.evaluate(sniff || () => {
             return JSON.stringify(window.performance.timing);
         });
 
-        gPerformance.push(JSON.parse(timing));
+        var timingObj = JSON.parse(timing);
+        if (Array.isArray(timingObj)) {
+            gPerformance = gPerformance.concat(timingObj);
+        } else {
+            gPerformance.push(timingObj);
+        }
 
         --totalTimes;
         console.log('Calculated:%d/%d', times - totalTimes, times);
@@ -58,13 +65,13 @@ function* work(url, times) {
     return gPerformance;
 }
 
-module.exports = (url, times) => {
+module.exports = (url, times, sniff) => {
     if (Number.isNaN(times) || times < 1) {
         times = 1;
     }
 
     return new Promise((resolve, reject) => {
-        vo(work)(url, times, (err, performance) => {
+        vo(work)(url, times, sniff, (err, performance) => {
             err ? reject(err) : resolve(performance);
         });
     });

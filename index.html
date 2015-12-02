@@ -11,6 +11,7 @@
     </head>
     <body>
     <div id="chart" style="height:400px;"></div>
+    <div id="chart-res" style="height:400px;"></div>
     </body>
     <script src="jquery-2.1.4.min.js"></script>
     <script src="echarts-all.js"></script>
@@ -62,7 +63,7 @@
     
             for (var i = 0; i < total.length; ++i) {
                 xAxisData.push(1+i);
-            };
+            }
     
             option.xAxis.push({
                     type : 'category',
@@ -74,4 +75,57 @@
         echarts.init($('#chart')[0]).setOption(option);
     });
     </script>
+        <script type="text/javascript">
+    var resOption = {
+    title : {
+        text: '广告加载性能分析'
+    },
+    tooltip : {
+        show: false,
+        trigger: 'axis'
+    },
+    legend: {
+        data:['iframe广告']
+    },
+    calculable : true,
+    xAxis : [],
+    yAxis : [
+        {
+            type : 'value',
+            axisLabel : {
+                formatter: '{value} ms'
+            }
+        }
+    ],
+    series : []
+};
+$.getJSON('result-res.json').then(function(data){
+
+    var xAxisData =[];
+
+    data = data.map(function(item){return item.duration}).filter(function(d){return d>10});
+    
+            for (var i = 0; i < data.length; ++i) {
+                xAxisData.push(1+i);
+            }
+    
+            resOption.xAxis.push({
+                    type : 'category',
+                    boundaryGap : false,
+                    data : xAxisData
+                });
+
+    resOption.series.push({
+                name: resOption.legend.data[0],
+                type: 'line',
+                data: data,
+                markLine : {
+                    data : [
+                        {type : 'average', name: '平均值'}
+                    ]
+                }
+    });
+    echarts.init($('#chart-res')[0]).setOption(resOption);
+});
+</script>
 </html>
