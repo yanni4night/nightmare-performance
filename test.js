@@ -11,17 +11,20 @@
  */
 const np = require('./');
 
-const TRY_TIMES = 20;
+const TRY_TIMES = 50;
+
+const AD = 'http://fes1.tieba.baidu.com/mo/q/m?word=%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C&page_from_search=index&tn6=bdISP&tn4=bdKSW&tn7=bdPSB&lm=16842752&lp=6093&sub4=%E8%BF%9B%E5%90%A7&pn=0';
+const NOAD = 'http://fes1.tieba.baidu.com/mo/q/m?word=%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C&page_from_search=index&tn6=bdISP&tn4=bdKSW&tn7=bdPSB&lm=16842752&lp=6093&sub4=%E8%BF%9B%E5%90%A7&pn=0&noad=1';
 
 //with ad
-np('http://fes1.yanni4night.com/p/4182887999?lp=5028&mo_device=1&new_word=%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C&is_jingpost=0&pn=0', TRY_TIMES).then((performance) => {
+np(AD, TRY_TIMES).then((performance) => {
     require('fs').writeFileSync('result-ad.json', JSON.stringify(performance, null, 2));
 }, (err) => {
     console.error(err.message);
 });
 
 //no ad
-np('http://fes1.yanni4night.com/p/4182887999?lp=5028&mo_device=1&new_word=%E9%AD%94%E5%85%BD%E4%B8%96%E7%95%8C&is_jingpost=0&pn=0&noad=1', TRY_TIMES).then((performance) => {
+np(NOAD, TRY_TIMES).then((performance) => {
     require('fs').writeFileSync('result-noad.json', JSON.stringify(performance, null, 2));
 }, (err) => {
     console.error(err.message);
