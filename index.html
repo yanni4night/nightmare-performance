@@ -39,14 +39,14 @@
     ],
     series : []
 };
-    var legends =['有广告的页面加载时间','无广告的页面加载时间']
+    var legends =['头像无懒加载','头像有懒加载']
     $.when($.getJSON('result-ad.json'), $.getJSON('result-noad.json'))
     .done(function(){
     var performances = Array.prototype.slice.apply(arguments).map(function(item){return item[0];});
        performances.forEach(function(performance,idx){
             var total = performance.map(function(item){
                 return item.loadEventStart - item.navigationStart;
-            }).filter(function(val){return val<1e4});
+            })//.filter(function(val){return val<2e3});
             option.legend.data.push(legends[idx]);
             option.series.push({
                 name: legends[idx],
@@ -75,7 +75,7 @@
         echarts.init($('#chart')[0]).setOption(option);
     });
     </script>
-        <script type="text/javascript">
+        <script type="text/tpl">
     var resOption = {
     title : {
         text: '广告加载性能分析'
