@@ -46,16 +46,34 @@ function* work(url, times, sniff) {
             yield n.wait(1e3);
         }
 
-        var timing = yield n.evaluate(sniff || () => {
-            return JSON.stringify(window.performance.timing);
-        });
-
-        var timingObj = JSON.parse(timing);
-        if (Array.isArray(timingObj)) {
-            gPerformance = gPerformance.concat(timingObj);
-        } else {
-            gPerformance.push(timingObj);
+       var times=0;
+        while(1){
+             var timing = yield n.evaluate(sniff || () => {
+                try{
+                    return +performance.getEntries('resource').filter(function(item){return /st.gif/.test(item.name)})[0].name.match(/fs=(\d+)/)[1]
+                }catch(e){
+                    return 0;
+                }
+            });
+             var timingObj = timing;//JSON.parse(timing);
+             if(!timingObj) {
+                yield n.wait(500);
+                times+=1;
+                if(times>10){
+                    break;
+                }
+             } else {
+                gPerformance.push(timingObj);
+                break;
+             }
         }
+
+        
+        /*if (Array.isArray(timingObj)) {
+            gPerformance = gPerformance.concat(timingObj);
+        } else {*/
+            
+        //}
 
         --totalTimes;
         console.log('Calculated:%d/%d', times - totalTimes, times);
