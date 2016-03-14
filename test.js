@@ -13,19 +13,29 @@ const np = require('./');
 
 const TRY_TIMES = 1;
 
-var URLS = ["http://fes1.tieba.baidu.com/p/4238963602?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/3610015511?lp=5028&mo_device=1&is_jingpost=1", "http://fes1.tieba.baidu.com/p/4239254599?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4239702305?lp=5028&mo_device=1&is_jingpost=0", "javascript:;", "http://fes1.tieba.baidu.com/p/4237326094?lp=5028&mo_device=1&is_jingpost=0", "", "http://fes1.tieba.baidu.com/p/4239657081?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4239886830?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4238651805?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4223176285?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4239888330?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4151241119?lp=5028&mo_device=1&is_jingpost=0", "javascript:;", "http://fes1.tieba.baidu.com/p/4239823975?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4239551796?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4239879189?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/297554321?lp=5028&mo_device=1&is_jingpost=1", "http://fes1.tieba.baidu.com/p/4239894946?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4161343458?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4239688534?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4239887912?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4227940551?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4239837797?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4238061354?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4239866261?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4237042284?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4239865411?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4239883057?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4239167977?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4238085667?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4239596067?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4239810438?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4200984712?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4239508339?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4237585776?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4239005679?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4238492517?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4236920369?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4239675654?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4238963498?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4234236282?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4236835125?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4239830042?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4239569359?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4239868232?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4238606270?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4238745450?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4234302959?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4239786730?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4239831385?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4238834442?lp=5028&mo_device=1&is_jingpost=0", "http://fes1.tieba.baidu.com/p/4238697214?lp=5028&mo_device=1&is_jingpost=0"].filter(function(item){return /^https?:/.test(item);})
+var forumNames = ["鑫谷", "贴吧涂鸦", "郑多燕", "百变公主", "奇迹战神", "联想", "战舰大海战", "抢滩登陆", "战斗吧剑灵", "东方不败手游", "造就", "投哪网", "盈火虫",
+    "百度问卷", "校呵呵", "征途手机版", "机甲", "合金弹头", "射雕英雄传3d", "射雕英雄传3d", "oppo", "爱钱进", "轩辕剑之天之痕", "优派", "优派", "手游福利",
+    "天下手游", "四季沐歌", "妖精的尾巴启程", "盗墓笔记页游", "nubia", "问道手游", "传奇永恒官方", "牛汇", "新凤祥", "祥光", "祥光", "天能电池", "生活家装饰",
+    "西北农林科技大学", "中国美术学院", "团贷网", "智操盘", "先马", "瓜子二手车直卖网", "瓜子二手车直卖网", "机械革命", "花漾梦工厂", "尚德机构", "时风", "昂立教育", "昂立教育",
+    "豆豆钱", "大皇帝", "课工场", "河南整形美容医院", "百度医生", "延长石油", "小咖秀", "秒拍", "火山鸣泉", "车易拍", "皇牌机娘", "富德生命人寿", "长安轻型车", "阿凡题",
+    "楚楚街", "望子成龙学校", "ibasso", "魔霸英雄", "51talk", "良品铺子", "水浒q传手游", "哈尔滨理工大学", "西南科技大学", "优分期", "赚客", "快快租车", "快快贷",
+    "我欲封天正版手游", "生发", "爱投资", "万茗堂", "彩票宝", "中油一建", "玖富理财", "王牌对王牌", "韩都衣舍", "小狗吸尘器", "快用苹果助手", "全民暗黑", "亚都", "荔枝fm",
+    "百金cdn", "巴士壹佰", "仙灵世界", "龙虎门手游", "小巨蛋", "盛京银行", "惠普"
+];
+
+const URLS_WO_SEGMENT = forumNames.map((forumName)=>{
+    return 'http://cq01-hj-lh-sandbox-01.epc.baidu.com:8080/f?ie=utf-8&kw='+encodeURIComponent(forumName)+'&fr=search&pn=0';
+})//.slice(0,3);
 //.slice(0,3);
 
-const AD = URLS.slice();
-const NOAD = URLS.map(function (item) {
-    return item += '&topfs=1';
-});
+const URLS_WI_SEGMENT = URLS_WO_SEGMENT.map((url)=>{return url+'&segment=1';});
+
 
 var AD_RESULTS = [];
 var NOAD_RESULTS = [];
 
 function run() {
-    var top = AD.shift();
+    var top = URLS_WO_SEGMENT.shift();
     if (top) {
         np(top, TRY_TIMES).then((performance) => {
             AD_RESULTS = performance.concat(AD_RESULTS);
@@ -39,7 +49,7 @@ function run() {
 }
 
 function runLazy() {
-    var top = NOAD.shift();
+    var top = URLS_WI_SEGMENT.shift();
     if (top) {
         np(top, TRY_TIMES).then((performance) => {
             NOAD_RESULTS = performance.concat(NOAD_RESULTS);

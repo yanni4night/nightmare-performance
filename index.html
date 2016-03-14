@@ -18,7 +18,7 @@
     <script type="text/javascript">
     var option = {
     title : {
-        text: '页面加载性能分析'
+        text: '智能版FRS包含网络的白屏时间统计（对比）'
     },
     tooltip : {
         show: false,
@@ -39,7 +39,7 @@
     ],
     series : []
 };
-    var legends =['原首屏','新首屏']
+    var legends =['正常输出','分段输出']
     $.when($.getJSON('result-ad.json'), $.getJSON('result-noad.json'))
     .done(function(){
     var performances = Array.prototype.slice.apply(arguments).map(function(item){return item[0];});

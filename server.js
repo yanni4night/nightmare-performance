@@ -14,10 +14,7 @@ const router = require('koa-router')();
 const sendfile = require('koa-sendfile');
 const serve = require('koa-static');
 
-router.get('/', function* (next) {
-    var stats = yield * sendfile.call(this, 'index.html');
-    if (!this.status) this.throw(404);
-});
+
 
 app
     .use(router.routes())
